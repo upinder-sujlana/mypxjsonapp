@@ -6,7 +6,7 @@ metadata:
   namespace: default
 type: Opaque
 data:
-  MYSQL_ROOT_PASSWORD: UGFzc3dvcmQx # Base64 encoded value of 'Password1'
+  MYSQL_ROOT_PASSWORD: UGFzc3dvcmQx
 ---
 apiVersion: v1
 kind: Pod
@@ -27,7 +27,7 @@ spec:
           key: MYSQL_ROOT_PASSWORD
     # Add this to ensure a default database is created on startup
     - name: MYSQL_DATABASE
-      value: mydatabase # You can change this to any database name you prefer
+      value: mydatabase
     ports:
     - containerPort: 3306
       name: mysql-port
