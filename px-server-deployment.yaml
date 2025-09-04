@@ -33,7 +33,7 @@ spec:
         - name: MYSQL_HOST
           value: "my-mysql-service"
         - name: MYSQL_PORT
-          value: "3306"
+          value: "32238" # "3306"
         - name: MYSQL_DB
           value: "mydatabase"
 ---
