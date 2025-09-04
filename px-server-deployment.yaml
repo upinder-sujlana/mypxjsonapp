@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: px-server-deployment
+  labels:
+    app: px-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: px-server
+  template:
+    metadata:
+      labels:
+        app: px-server
+    spec:
+      containers:
+      - name: px-server-container
+        image: px-server-image:v1.0 #Changing to test
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          name: http-port
+        env:
+        - name: MYSQL_USER
+          value: "root"
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-root-password
+              key: MYSQL_ROOT_PASSWORD
+        - name: MYSQL_HOST
+          value: "my-mysql-service"
+        - name: MYSQL_PORT
+          value: "3306"
+        - name: MYSQL_DB
+          value: "mydatabase"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: px-server-service
+  labels:
+    app: px-server
+spec:
+  selector:
+    app: px-server
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+    name: http-main
+  type: NodePort
