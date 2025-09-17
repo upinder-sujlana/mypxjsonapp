@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: px-server-container
-        image: upigrad82/px-server-image:v4444.0 #Changing to test
+        image: upigrad82/px-server-image:v4.0 #Changing to test
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
